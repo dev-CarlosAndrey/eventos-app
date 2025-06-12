@@ -9,8 +9,12 @@ export const EventProvider = ({children}) => {
         setEvents((prev) => [...prev, event]);
     };
 
+    const removeEvent = (eventName) => {
+        setEvents((prevEvents) => prevEvents.filter(event => event.name !== eventName))
+    }
+
     return (
-        <EventContext.Provider value={{ events, addEvent }}>
+        <EventContext.Provider value={{ events, addEvent, removeEvent }}>
             {children}
         </EventContext.Provider>
     );

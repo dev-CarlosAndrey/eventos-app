@@ -14,6 +14,7 @@ import { useEvent } from "../../context/EventContext";
 
 export default function AddEvent() {
   const [eventName, setEventName] = useState("");
+  const [eventDate, setEventDate] = useState("");
   const { events, addEvent } = useEvent();
   const router = useRouter();
 
@@ -23,12 +24,12 @@ export default function AddEvent() {
       return;
     }
 
-    if (events.includes(eventName)) {
+    if (events.some(event => event.name === eventName)) {
       Alert.alert("Aviso", "Já existe um evento com este nome");
       return;
     }
 
-    addEvent(eventName);
+    addEvent({name: eventName, date: eventDate});
     router.push("/");
 
   };
@@ -48,11 +49,15 @@ export default function AddEvent() {
           style={styles.inputName}
           placeholder="Nome"
           placeholderTextColor="#555"
+          value={eventName}
+          onChangeText={setEventName}
         ></TextInput>
         <TextInput
           style={styles.inputDate}
           placeholder="Data"
           placeholderTextColor="#555"
+          value={eventDate}
+          onChangeText={setEventDate}
         ></TextInput>
 
         <Button title="Registrar" onPress={handleAdd} />

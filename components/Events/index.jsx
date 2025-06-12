@@ -4,8 +4,9 @@ import { IconTrash } from '../Icons'
 export const Events = ({ item, onRemove}) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.text}>{item}</Text>
-      <TouchableOpacity onPress={() => onRemove(item)}>
+      <Text style={styles.text}>{item.name}</Text>
+      <Text style={styles.text}>{item.date}</Text>
+      <TouchableOpacity onPress={() => onRemove(item.name)}>
         <IconTrash/>
       </TouchableOpacity>
     </View>

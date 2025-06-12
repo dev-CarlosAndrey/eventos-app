@@ -3,30 +3,19 @@ import { Button } from "../components/Button";
 import { Events } from "../components/Events";
 import { Header } from "../components/Header";
 import { router } from "expo-router";
-import { useState } from "react";
 import { Footer } from "../components/Footer";
+import { useEvent } from "../context/EventContext";
 
   
 export default function Index() {
-  const [events, setEvent] = useState([]);
-  const [eventName, setEventName] = useState("");
-
-  const handleEventsAdd = () => {
-    if (events.includes(eventName)) {
-      Alert.alert("Aviso", "Já existe um evento com este nome");
-    }
-
-    setEvent((prevState) => [...prevState, eventName]);
-  };
+  const {events, removeEvent} = useEvent();
 
   const handleEventRemove = (nome) => {
     Alert.alert("Aviso", `Remover evento ${nome}?`, [
       {
         text: "Sim",
         onPress: () =>
-          setEvent((prevState) =>
-            prevState.filter((nomeEvent) => nomeEvent !== nome)
-          ),
+          removeEvent(nome)
       },
       { text: "Não", style: "cancel" },
     ]);
@@ -35,11 +24,12 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Header title={"Meus Eventos"} />
+
       <FlatList
         data={events}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <Events event={item} onRemove={handleEventRemove} />
+          <Events item={item} onRemove={handleEventRemove} />
         )}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}

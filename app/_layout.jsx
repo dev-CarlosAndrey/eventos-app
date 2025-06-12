@@ -4,7 +4,11 @@ import { EventProvider } from "../context/EventContext";
 export default function Layout() {
   return (
     <EventProvider>
-      <Stack />
+      <Stack 
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
     </EventProvider>
   );
 }
