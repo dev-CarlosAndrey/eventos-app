@@ -5,24 +5,23 @@ import { Header } from "../components/Header";
 import { router } from "expo-router";
 import { Footer } from "../components/Footer";
 import { useEvent } from "../context/EventContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-  
 export default function Index() {
-  const {events, removeEvent} = useEvent();
+  const { events, removeEvent } = useEvent();
 
   const handleEventRemove = (nome) => {
     Alert.alert("Aviso", `Remover evento ${nome}?`, [
       {
         text: "Sim",
-        onPress: () =>
-          removeEvent(nome)
+        onPress: () => removeEvent(nome),
       },
       { text: "Não", style: "cancel" },
     ]);
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header title={"Meus Eventos"} />
 
       <FlatList
@@ -45,7 +44,7 @@ export default function Index() {
         />
       </View>
       <Footer />
-    </View>
+    </SafeAreaView>
   );
 }
 
