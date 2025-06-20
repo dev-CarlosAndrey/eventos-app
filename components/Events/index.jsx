@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { IconTrash } from '../Icons'
 
-export const Events = ({ item, onRemove}) => {
+export const Events = ({ item, onRemove }) => {
   return (
     <View style={styles.card}>
       <Text style={styles.text}>{item.name}</Text>
